@@ -394,8 +394,8 @@ TTC is estimated from two subsequent Lidar measurements d[i] (d1) at the current
 |d1 = d0 - v_rel * dt|d[i] = d[i-1] - v_rel[i] * dt[i]|
 |v_rel = -(d1 - d0) / dt|v_rel[i] = -(d[i] - d[i-1]) / dt[i]|
 |ttc = -t / (1 - d1 / d0)|ttc[i] = d[i] / v_rel[i]|  
-*Table 1: Equations to estimate TTC using two subsequent Lidar distance measurements to a moving or standing target object*  
-
+*Table 1: Equations to estimate TTC using two subsequent Lidar distance measurements to a moving or standing target object*
+  
 NOTE: Please not that inversions of the estimated relative velocity direction or divisions by zero velocity are not caught on purpose to see where we have such events in the results.
 
 However, despite the shrinkage of the target bounding box, there may still be outliers left that do not map to the target object. Additionally, some measurement noise may be present, too. So the 3D Lidar point cloud associated with the target object is not completely stable over all frames. Five methods have been implemented to see which one yields a more robust distance estimate from the 3D Lidar points associated with the target object ROI:
@@ -435,8 +435,8 @@ Fig. 6 and fig. 7 show an example of TTC estimation using two subsequent Lidar m
 |0016.png|288|3.175354|8.898673|8.966659|9.515525|9.200032|10.640834|
 |0017.png|273|-9.994236|11.030114|11.180682|9.612415|12.385663|11.228982|
 |0018.png|295|8.309779|8.535568|7.688745|8.398803|10.095541|7.993027|  
-*Table 2: Evaluation of TTC estimation methods based on two subsequent Lidar measurements (using FAST / BRIEF as detector / descriptor combination for bounding box association)*  
-
+*Table 2: Evaluation of TTC estimation methods based on two subsequent Lidar measurements (using a FAST / BRIEF as detector / descriptor combination)*
+  
 Table 2 shows a comparison of the different TTC estimation methods using Lidar data. You can find the results also in the following Excel table [TTC_estimation_methods_using_Lidar.xlsx](results/TTC_estimation_methods_using_Lidar.xlsx).  
 Method 1 using the shortest distance yields the poorest results as this method cannot compensate for stochastic variations. Every outlier that is the closest distance measurement will be mistaken for the best measurement spot. The other methods seem to be more robust. Please note that method 5 becomes method 1 (shortest distance) if we set the threshold to 0, or it becomes method 4 (median distance) if we set the threshold to 0.5. Method 5 becomes more robust when the threshold gets closer to 0.5. When checking the result tables from section 6 (Performance Evaluation 5) and comparing TTC estimations from Lidar and Vision data method 4 (median value) seems to be the most robust choice. This matches with the experience that median filtering is a good choice to reduce stochastic noise in general.
   
@@ -494,8 +494,8 @@ TTC is estimated from the change, respectively the ratio d[i] / d[i-1] (d1 / d0)
 |d1 = d0 - v_rel * dt |d[i] = d[i-1] - v_rel[i] * dt[i]| 
 |v_rel = -(d1 - d0) / dt|v_rel[i] = -(d[i] - d[i-1]) / dt[i]
 |ttc = -t / (1 - d1 / d0)  |ttc[i] = - dt[i] / (1 - d[i] / d[i-1])|  
-*Table 3: Equations of TTC estimation using distance ratio of keypoint correspondences on the target object in two subsequent image frames*  
-
+*Table 3: Equations of TTC estimation using distance ratio of keypoint correspondences on the target object in two subsequent image frames*
+  
 NOTE: Please not that inversions of the distance ratio (resp. the estimated relative velocity direction) or divisions by zero are not caught on purpose to see where we have such events in the results.
 
 ![fig_11](images/fig_11_2d_keypoint_matches_associated_with_2d_bb_and_ttc_estimation.png)  
@@ -564,8 +564,8 @@ In the mid-term project [SFND 2D Feature Tracking](https://github.com/AndiA76/SF
 |0015.png|286|8.521566|131|9.807788|182|10.758689|150|9.881963|
 |0016.png|288|9.515525|132|10.274708|161|9.509632|154|10.118211|
 |0017.png|273|9.612415|127|9.208120|150|9.405597|133|10.073293|
-|0018.png|295|8.398803|111|11.182776|163|10.395215|121|10.126918|
-*Table 4: Evaluation of TTC estimation using the top 3 detector / descriptor combinations from mid-term project in comparision with TTC estimations using Lidar*  
+|0018.png|295|8.398803|111|11.182776|163|10.395215|121|10.126918|  
+*Table 4: Evaluation of TTC estimation using the top 3 detector / descriptor combinations from mid-term project in comparision with TTC estimations using Lidar*
   
 Table 4 shows the TTC evaluation for our top 3 descriptor / extractor combinations. You can find the results also in the following Excel table [TTC_estimation_methods_using_Camera.xlsx](results/TTC_estimation_methods_using_Camera.xlsx).
   
@@ -578,8 +578,8 @@ For our top 3 detector / descriptor combinations things turn out quite well with
 |2. mean distance|[3D_object_tracking_overall_results_2.csv](results/3D_object_tracking_overall_results_2.csv)|
 |3. clostest distance larger than mean distance minus x-times standard deviation|[3D_object_tracking_overall_results_3.csv](results/3D_object_tracking_overall_results_3.csv)|
 |4. median distance|[3D_object_tracking_overall_results_4.csv](results/3D_object_tracking_overall_results_4.csv)|
-|5. threshold (20%) on sorted distances|[3D_object_tracking_overall_results_5.csv](results/3D_object_tracking_overall_results_5.csv)|
-*Table 5: Links to the evaluation of TTC estimation using all implemnted detector / descriptor combinations and TTC estimations methods for Lidar*  
+|5. threshold (33%) on sorted distances|[3D_object_tracking_overall_results_5.csv](results/3D_object_tracking_overall_results_5.csv)|  
+*Table 5: Links to the evaluation of TTC estimation using all implemnted detector / descriptor combinations and TTC estimations methods for Lidar*
   
 Remarks:
 * KAZE or AKZE descriptor extractors only work with KAZE or AKAZE keypoints
